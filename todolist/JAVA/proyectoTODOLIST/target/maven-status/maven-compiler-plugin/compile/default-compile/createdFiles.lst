@@ -1,0 +1,4 @@
+edu/levelup/entities/Usuario.class
+edu/levelup/services/TareaService.class
+edu/levelup/entities/Tarea.class
+edu/levelup/services/UsuarioService.class

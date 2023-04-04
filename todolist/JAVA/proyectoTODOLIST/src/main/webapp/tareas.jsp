@@ -1,0 +1,50 @@
+<%-- 
+    Document   : tareas
+    Created on : 16/03/2023, 17:21:22
+    Author     : marher
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="./styletables.css"/>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <table>
+            <jsp:useBean class="edu.levelup.entities.Tarea" scope="session" id="tareaBean"/>
+            <jsp:useBean class="edu.levelup.entities.Usuario" scope="session" id="usuarioBean"/>
+            <jsp:setProperty param="nombre" property="nombre" name="tareaBean"/>
+            <jsp:setProperty param="finalizado" property="finalizado" name="tareaBean"/>
+            <jsp:setProperty param="idTarea" property="idTarea" name="tareaBean"/>
+            <form action="tareas.jsp">
+                Agregar tarea <input type="text" name="nombre" />
+                Eliminar Tarea <input type="text" name="idTarea"/>
+                <input type="submit" value="Agregar"/>
+                <input type="submit" value="Eliminar"/>
+
+            </form>
+            <jsp:useBean class="edu.levelup.services.TareaService" scope="session" id="tareaService" />
+            <%tareaService.crearTarea(usuarioBean, tareaBean);%>
+           <%-- <%tareaService.eliminarTarea(idTarea);%> --> --%>
+            <h3>Lista de Tareas </h3>
+            <ul>
+                <%
+                    java.util.List<edu.levelup.entities.Tarea> lista = tareaService.listarTareas();
+                    for (int  i = 0 ; i< lista.size(); i++){
+                        edu.levelup.entities.Tarea tarea = (edu.levelup.entities.Tarea)lista.get(i);
+                        out.println("<li>" + tarea.getIdTarea()+"  - "+ tarea.getNombre() + "</li>");
+                    }
+                %>
+            </ul> 
+
+            <form> 
+
+
+
+            </form>
+        </table>
+    </body>
+</html>
