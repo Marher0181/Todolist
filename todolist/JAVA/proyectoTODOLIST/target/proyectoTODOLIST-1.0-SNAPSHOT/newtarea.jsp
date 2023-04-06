@@ -28,15 +28,16 @@
         <form action="tareas.jsp">
             Agregar tarea <input type="text" name="nombre" />
             <input type="submit" value="Agregar"/>
-            Eliminar tarea <input type="text" name="nombre" />
-            <input type="submit" value="Eliminar"/>
         </form>
         <ul>
             <%
                 java.util.List<edu.levelup.entities.Tarea> lista = tareaService.listarTareas();
                 for (int  i = 0 ; i< lista.size(); i++){
                     edu.levelup.entities.Tarea tarea = (edu.levelup.entities.Tarea)lista.get(i);
-                    out.println("<li>" + tarea.getIdTarea()+"  - "+ tarea.getNombre() + "</li>");
+                    out.println("<li>" + tarea.getIdTarea()+"  - "+ tarea.getNombre() + 
+                        "<a href=eliminar.jsp?idTarea=" + tarea.getIdTarea() +"> Elminiar </a>" +
+                            "<a href=editar.jsp?idTarea=" + tarea.getIdTarea() +"> Editar </a>" + "</li>" );
+                    
                 }
             %>
         </ul> 

@@ -21,21 +21,19 @@
             <jsp:setProperty param="idTarea" property="idTarea" name="tareaBean"/>
             <form action="tareas.jsp">
                 Agregar tarea <input type="text" name="nombre" />
-                Eliminar Tarea <input type="text" name="idTarea"/>
                 <input type="submit" value="Agregar"/>
-                <input type="submit" value="Eliminar"/>
-
             </form>
             <jsp:useBean class="edu.levelup.services.TareaService" scope="session" id="tareaService" />
             <%tareaService.crearTarea(usuarioBean, tareaBean);%>
-           <%-- <%tareaService.eliminarTarea(idTarea);%> --> --%>
+
             <h3>Lista de Tareas </h3>
             <ul>
                 <%
                     java.util.List<edu.levelup.entities.Tarea> lista = tareaService.listarTareas();
                     for (int  i = 0 ; i< lista.size(); i++){
                         edu.levelup.entities.Tarea tarea = (edu.levelup.entities.Tarea)lista.get(i);
-                        out.println("<li>" + tarea.getIdTarea()+"  - "+ tarea.getNombre() + "</li>");
+                        out.println("<li>" + tarea.getIdTarea()+"  - "+ tarea.getNombre() + 
+                        "<a href=eliminar.jsp?idTarea=" + tarea.getIdTarea() +"> Elminiar </a>" + "</li>"  ;
                     }
                 %>
             </ul> 
